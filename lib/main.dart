@@ -1,36 +1,32 @@
 import 'package:flutter/material.dart';
-import 'core/theme/dark.dart';
-import 'core/theme/light.dart';
-import 'features/home.dart';
+import 'package:provider/provider.dart';
+import 'core/theme/theme_switch.dart';
+import 'features/screens/main_menu.dart';
+import 'features/screens/single_player.dart';
+import 'features/screens/multi_player.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => ThemeSwitch(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: lightTheme,
-      darkTheme: darkTheme,
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Tic Tac Toe'),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.brightness_4),
-              onPressed: () {
-                // TODO: Implement theme toggle functionality
-              },
-            ),
-          ],
-        ),
-        body: const HomePage(),
-      ),
+      home: const MainMenu(),
+      theme: Provider.of<ThemeSwitch>(context).themeData,
+      routes: {
+        '/single_player': (context) => const SinglePlayer(),
+        '/multi_player': (context) => const MultiPlayer(),
+      },
     );
   }
 }
