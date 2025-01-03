@@ -8,7 +8,7 @@ class MainMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(title: Text("Main Menu")),
+      appBar: MyAppBar(title: Text("Tic Tac Toe")),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -37,7 +37,7 @@ class MainMenu extends StatelessWidget {
             SizedBox(height: 50),
             Padding(
               padding: const EdgeInsets.all(20.0),
-              child: Row(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   MenuButton(
