@@ -11,6 +11,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       title: title,
+      backgroundColor: Colors.transparent,
       foregroundColor: Theme.of(context).colorScheme.onPrimary,
       actions: [
         Padding(
