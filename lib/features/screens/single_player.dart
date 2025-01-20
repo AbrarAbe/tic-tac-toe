@@ -1,9 +1,8 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
-import '../components/my_alert_dialog.dart';
 import '../components/my_appbar.dart';
 import '../components/my_box.dart';
+import '../components/my_alert_dialog.dart';
 
 class SinglePlayer extends StatefulWidget {
   const SinglePlayer({super.key});
@@ -16,72 +15,96 @@ class _SinglePlayerState extends State<SinglePlayer> {
   String _currentPlayer = 'X';
   List<String?> _board = List.generate(9, (_) => null);
   List<Color?> _boxColors = List.generate(9, (_) => null);
-  bool _gameActive = true;
-
   final List<List<int>> _winningCombinations = [
-    // horiozntal
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
-    // verticalabraro
     [0, 3, 6],
     [1, 4, 7],
     [2, 5, 8],
-    // diagonal
     [0, 4, 8],
     [2, 4, 6],
   ];
 
   void _handleTap(int index) {
-    if (!_gameActive) return;
     if (_board[index] == null) {
       setState(() {
         _board[index] = _currentPlayer;
-        _boxColors[index] =
-            _currentPlayer == 'X'
-                ? Theme.of(context).colorScheme.primary
-                : Theme.of(context).colorScheme.secondary;
+        _boxColors[index] = Theme.of(context).colorScheme.primary;
       });
       final winner = _checkWinner();
       if (winner != null) {
-        _gameActive = false;
         _showWinnerDialog(winner);
-        return;
       } else if (_checkDraw()) {
-        _gameActive = false;
         _showDrawDialog();
-        return;
-      }
-      _togglePlayer();
-      if (_currentPlayer == 'O') {
+      } else {
         _computerMove();
       }
     }
   }
 
-  void _togglePlayer() {
-    setState(() {
-      _currentPlayer = _currentPlayer == 'X' ? 'O' : 'X';
-    });
-  }
-
-  void _computerMove() {
-    if (!_gameActive) return;
-    if (_currentPlayer == 'O') {
-      final emptyCells =
-          List.generate(
-            9,
-            (index) => index,
-          ).where((index) => _board[index] == null).toList();
-      if (emptyCells.isNotEmpty) {
-        final randomIndex = Random().nextInt(emptyCells.length);
-        final computerIndex = emptyCells[randomIndex];
-
-        Future.delayed(const Duration(milliseconds: 200), () {
-          _handleTap(computerIndex);
-        });
+  Future<void> _computerMove() async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    final bestMove = _getBestMove();
+    if (bestMove != null) {
+      setState(() {
+        _board[bestMove] = 'O';
+        _boxColors[bestMove] = Theme.of(context).colorScheme.secondary;
+      });
+      final winner = _checkWinner();
+      if (winner != null) {
+        _showWinnerDialog(winner);
+      } else if (_checkDraw()) {
+        _showDrawDialog();
       }
     }
+  }
+
+  int? _getBestMove() {
+    // Prioritas 1: Menang
+    final winningMove = _findWinningMove('O');
+    if (winningMove != null) {
+      return winningMove;
+    }
+    // Prioritas 2: Blokir Pemain
+    final blockingMove = _findWinningMove('X');
+    if (blockingMove != null) {
+      return blockingMove;
+    }
+    // Prioritas 3: Pilih Cell Kosong Acak
+    final emptyCells = <int>[];
+    for (int i = 0; i < _board.length; i++) {
+      if (_board[i] == null) {
+        emptyCells.add(i);
+      }
+    }
+    if (emptyCells.isNotEmpty) {
+      final random = Random();
+      final randomIndex = random.nextInt(emptyCells.length);
+      return emptyCells[randomIndex];
+    }
+    return null;
+  }
+
+  int? _findWinningMove(String player) {
+    for (final combination in _winningCombinations) {
+      if (_board[combination[0]] == player &&
+          _board[combination[1]] == player &&
+          _board[combination[2]] == null) {
+        return combination[2];
+      }
+      if (_board[combination[0]] == player &&
+          _board[combination[2]] == player &&
+          _board[combination[1]] == null) {
+        return combination[1];
+      }
+      if (_board[combination[1]] == player &&
+          _board[combination[2]] == player &&
+          _board[combination[0]] == null) {
+        return combination[0];
+      }
+    }
+    return null;
   }
 
   String? _checkWinner() {
@@ -114,7 +137,7 @@ class _SinglePlayerState extends State<SinglePlayer> {
           buttonText: "Play Again",
         );
       },
-    );
+    ).whenComplete(() => _resetGame());
   }
 
   void _showDrawDialog() {
@@ -132,7 +155,7 @@ class _SinglePlayerState extends State<SinglePlayer> {
           buttonText: "Play Again",
         );
       },
-    );
+    ).whenComplete(() => _resetGame());
   }
 
   void _resetGame() {
@@ -140,14 +163,13 @@ class _SinglePlayerState extends State<SinglePlayer> {
       _board = List.generate(9, (_) => null);
       _boxColors = List.generate(9, (_) => null);
       _currentPlayer = 'X';
-      _gameActive = true;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(title: Text("Player vs Computer")),
+      appBar: MyAppBar(title: const Text("Singe Player")),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
