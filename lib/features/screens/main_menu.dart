@@ -8,7 +8,7 @@ class MainMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(title: Text("Tic Tac Toe")),
+      appBar: MyAppBar(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -16,39 +16,50 @@ class MainMenu extends StatelessWidget {
             Text(
               "T I C",
               style: TextStyle(
-                fontSize: 50,
+                fontSize: 85,
+                fontWeight: FontWeight.bold,
                 color: Theme.of(context).colorScheme.onPrimary,
               ),
             ),
             Text(
               "T A C",
               style: TextStyle(
-                fontSize: 40,
-                color: Theme.of(context).colorScheme.onPrimary.withAlpha(99),
+                fontSize: 45,
+                fontWeight: FontWeight.bold,
+                color: Theme.of(
+                  context,
+                ).colorScheme.onPrimary.withValues(alpha: 99),
               ),
             ),
             Text(
               "T O E",
               style: TextStyle(
-                fontSize: 35,
-                color: Theme.of(context).colorScheme.onPrimary.withAlpha(98),
+                fontSize: 65,
+                fontWeight: FontWeight.bold,
+                color: Theme.of(
+                  context,
+                ).colorScheme.onPrimary.withValues(alpha: 50),
               ),
             ),
             SizedBox(height: 50),
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Column(
+                spacing: 20.0,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   MenuButton(
-                    text: "Single Player",
-                    onTap: () => Navigator.pushNamed(context, '/single_player'),
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                  const SizedBox(height: 20),
-                  MenuButton(
+                    buttonWidth: 180,
+                    icon: Icons.people,
                     text: "Play with a friend",
                     onTap: () => Navigator.pushNamed(context, '/multi_player'),
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                  MenuButton(
+                    buttonWidth: 195,
+                    icon: Icons.person,
+                    text: "Play with Computer",
+                    onTap: () => Navigator.pushNamed(context, '/single_player'),
                     color: Theme.of(context).colorScheme.primary,
                   ),
                 ],
