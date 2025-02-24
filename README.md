@@ -1,16 +1,94 @@
-# tic_tac_toe
+# Tic-Tac-Toe - Flutter
 
-A new Flutter project.
+This project is a simple implementation of the classic game Tic-Tac-Toe, built using Flutter.  It supports both single-player (against a basic AI) and two-player modes.  The app is designed to be responsive and uses Flutter's theming capabilities for easy customization.
 
+## Features
+
+*   **Two Game Modes:**
+    *   **Single Player:** Play against a computer opponent.  The AI uses a simple strategy:
+        1.  Win if possible.
+        2.  Block the player from winning.
+        3.  Choose a random empty cell.
+    *   **Two Player:**  Play against another person on the same device.
+
+*   **Dynamic Theming:** The app's color scheme responds to changes in the Flutter theme. You can easily customize the look and feel.
+
+*   **Game Logic:**
+    *   Detects wins (horizontal, vertical, and diagonal).
+    *   Detects draws.
+    *   Resets the game after a win or draw.
+    *   Clear visual feedback for the current player and winning moves.
+
+*   **UI:**
+    *   Clean and intuitive user interface.
+    *   Uses `GridView` for a responsive board layout.
+    *   `AlertDialog` for displaying game results (win/draw).
+    *   Custom widgets (`MyBox`, `PlayerBox`, `MyAppBar`, `MyAlertDialog`) for better organization and reusability.
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+### Prerequisites
 
-A few resources to get you started if this is your first Flutter project:
+*   **Flutter SDK:**  You'll need to have the Flutter SDK installed on your machine.  Follow the official Flutter installation guide: [https://docs.flutter.dev/get-started/install](https://docs.flutter.dev/get-started/install)
+*   **Dart SDK:** The Dart SDK is typically installed along with Flutter.
+*   **Emulator or Device:**  You'll need either an Android emulator, iOS simulator, or a physical device connected to your computer to run the app.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Running the Project
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1.  **Clone the Repository:**
+    ```bash
+    git clone https://github.com/AbrarAbe/tic-tac-toe
+    cd tic_tac_toe  # (Replace with the actual directory name)
+    ```
+
+2.  **Get Dependencies:**
+    ```bash
+    flutter pub get
+    ```
+
+3.  **Run the App:**
+    ```bash
+    flutter run
+    ```
+    This command will build and run the app on your connected device or emulator.  If you have multiple devices connected, you might need to specify the target device using the `-d` flag (e.g., `flutter run -d <device_id>`).
+
+## Project Structure
+
+The project is organized as follows:
+
+*   `lib/`: Contains the Dart source code.
+    *   `features/`:  Contains the main features of the app.
+        *   `screens/`:  Contains the screen implementations.
+            *   `single_player.dart`:  The single-player game screen.
+            *   `multi_player.dart`: The multi-player game screen
+        *  `components`: Reusable widgets.
+            *   `my_appbar.dart`: A custom app bar.
+            *   `my_box.dart`:  Represents a single cell on the Tic-Tac-Toe board.
+            *   `player_box.dart`:  Displays information about the current player (likely could be improved/removed).
+            *   `my_alert_dialog.dart`:  A custom alert dialog for game results.
+    * `main.dart`:  The entry point of the application.
+
+## Dependencies
+
+This project uses the standard Flutter libraries.  There are no external third-party packages beyond what comes with a basic Flutter project.
+
+*   `flutter/material.dart`: Provides the Material Design widgets.
+
+## AI Notes
+
+The single-player AI is intentionally basic. It doesn't use advanced algorithms like Minimax. This makes the game beatable for a human player, and keeps the code simpler for learning purposes.  Improving the AI would be a good next step for expanding the project.  Possible improvements:
+
+*   **Minimax Algorithm:** Implement the Minimax algorithm for a more challenging AI.
+*   **Difficulty Levels:**  Allow the user to select different difficulty levels (e.g., Easy, Medium, Hard), perhaps by adjusting the depth of the Minimax search.
+
+## Contributing
+
+Contributions are welcome!  If you find any bugs or have suggestions for improvements, feel free to open an issue or submit a pull request.
+
+## License
+
+This project is open-source and is distributed under the [MIT License](LICENSE). See the `LICENSE` file for details.
+
+## Contact
+
+*   [AbrarAbe](<https://github.com/AbrarAbe>)
+*   <abrar.abe01@gmail.com>
