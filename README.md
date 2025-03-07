@@ -2,6 +2,9 @@
 
 This project is a simple implementation of the classic game Tic-Tac-Toe, built using Flutter.  It supports both single-player (against a basic AI) and two-player modes.  The app is designed to be responsive and uses Flutter's theming capabilities for easy customization.
 
+## Demo
+https://github.com/user-attachments/assets/4480ed19-53d4-4275-8e80-497659c8f6a2
+
 ## Features
 
 *   **Two Game Modes:**
@@ -24,7 +27,8 @@ This project is a simple implementation of the classic game Tic-Tac-Toe, built u
     *   Uses `GridView` for a responsive board layout.
     *   `AlertDialog` for displaying game results (win/draw).
     *   Custom widgets (`MyBox`, `PlayerBox`, `MyAppBar`, `MyAlertDialog`) for better organization and reusability.
-## Getting Started
+      
+## Getting Started (for contributors)
 
 ### Prerequisites
 
@@ -56,15 +60,12 @@ This project is a simple implementation of the classic game Tic-Tac-Toe, built u
 The project is organized as follows:
 
 *   `lib/`: Contains the Dart source code.
-    *   `features/`:  Contains the main features of the app.
+    *   `core/`:  Contains the logic and functions of the game.
+        *   `logic/`:  Contains the game logic implementations.
+        *   `theme/`:  Contains the game logic implementations.
+    *   `features/`:  Contains the main features of the game.
         *   `screens/`:  Contains the screen implementations.
-            *   `single_player.dart`:  The single-player game screen.
-            *   `multi_player.dart`: The multi-player game screen
-        *  `components`: Reusable widgets.
-            *   `my_appbar.dart`: A custom app bar.
-            *   `my_box.dart`:  Represents a single cell on the Tic-Tac-Toe board.
-            *   `player_box.dart`:  Displays information about the current player (likely could be improved/removed).
-            *   `my_alert_dialog.dart`:  A custom alert dialog for game results.
+        *  `components/`: Reusable widgets.
     * `main.dart`:  The entry point of the application.
 
 ## Dependencies
