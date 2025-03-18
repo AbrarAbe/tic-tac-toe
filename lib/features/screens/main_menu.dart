@@ -49,17 +49,17 @@ class MainMenu extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   MenuButton(
+                    buttonWidth: 195,
+                    icon: Icons.person,
+                    text: "Play Solo",
+                    onTap: () => Navigator.pushNamed(context, '/single_player'),
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                  MenuButton(
                     buttonWidth: 180,
                     icon: Icons.people,
                     text: "Play with a friend",
                     onTap: () => Navigator.pushNamed(context, '/multi_player'),
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                  MenuButton(
-                    buttonWidth: 195,
-                    icon: Icons.person,
-                    text: "Play with Computer",
-                    onTap: () => Navigator.pushNamed(context, '/single_player'),
                     color: Theme.of(context).colorScheme.primary,
                   ),
                 ],

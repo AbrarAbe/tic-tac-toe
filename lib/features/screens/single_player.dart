@@ -77,7 +77,7 @@ class _SinglePlayerState extends State<SinglePlayer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(title: Text('Play with Computer')),
+      appBar: MyAppBar(title: Text('Play Solo')),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
