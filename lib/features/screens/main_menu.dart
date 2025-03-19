@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../components/menu_button.dart';
 import '../components/my_appbar.dart';
+import '../components/theme_button.dart';
 
 class MainMenu extends StatelessWidget {
   const MainMenu({super.key});
@@ -8,7 +9,7 @@ class MainMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(),
+      appBar: MyAppBar(leading: ThemeButton()),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -49,14 +50,14 @@ class MainMenu extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   MenuButton(
-                    buttonWidth: 195,
+                    buttonWidth: 200,
                     icon: Icons.person,
                     text: "Play Solo",
                     onTap: () => Navigator.pushNamed(context, '/single_player'),
                     color: Theme.of(context).colorScheme.primary,
                   ),
                   MenuButton(
-                    buttonWidth: 180,
+                    buttonWidth: 200,
                     icon: Icons.people,
                     text: "Play with a friend",
                     onTap: () => Navigator.pushNamed(context, '/multi_player'),
