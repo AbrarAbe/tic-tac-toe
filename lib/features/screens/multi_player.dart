@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_final_fields
 
 import 'package:flutter/material.dart';
+import 'package:tic_tac_toe/features/components/background.dart';
 import '../components/my_alert_dialog.dart';
 import '../components/my_appbar.dart';
 import '../components/my_box.dart';
@@ -68,44 +69,47 @@ class _MultiPlayerState extends State<MultiPlayer> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: MyAppBar(title: Text('Player with a friend!')),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Expanded(
-            flex: 2,
-            child: Padding(
-              padding: const EdgeInsets.all(25),
-              child: Center(
-                child: GridView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    return MyBox(
-                      boxShadow: _multiPlayerLogic.boxShadow[index],
-                      borderColor: _multiPlayerLogic.boxColors[index],
-                      onTap: () => _handleTap(index),
-                      child: Center(
-                        child: Text(
-                          _multiPlayerLogic.board[index] ?? '',
-                          style: TextStyle(
-                            fontSize: 50,
-                            color: _multiPlayerLogic.textColors[index],
+    return BackgroundAnimation(
+      child: Scaffold(
+        appBar: MyAppBar(title: Text('Player with a friend!')),
+        backgroundColor: Colors.transparent,
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Expanded(
+              flex: 2,
+              child: Padding(
+                padding: const EdgeInsets.all(25),
+                child: Center(
+                  child: GridView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      return MyBox(
+                        boxShadow: _multiPlayerLogic.boxShadow[index],
+                        borderColor: _multiPlayerLogic.boxColors[index],
+                        onTap: () => _handleTap(index),
+                        child: Center(
+                          child: Text(
+                            _multiPlayerLogic.board[index] ?? '',
+                            style: TextStyle(
+                              fontSize: 50,
+                              color: _multiPlayerLogic.textColors[index],
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  },
-                  itemCount: 9,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
+                      );
+                    },
+                    itemCount: 9,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
