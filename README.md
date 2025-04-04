@@ -87,7 +87,7 @@ Contributions are welcome!  If you find any bugs or have suggestions for improve
 
 ## License
 
-This project is open-source and is distributed under the [MIT License](LICENSE). See the `LICENSE` file for details.
+This project is open-source and is distributed under the [GPL-3.0 License](LICENSE). See the `LICENSE` file for details.
 
 ## Contact
 
